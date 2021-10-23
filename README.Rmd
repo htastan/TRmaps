@@ -1,0 +1,99 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/img/usage-",
+  out.width = "100%"
+)
+```
+
+# TRmaps <a href='https://github.com/htastan/TRmaps'><img src='man/img/hex1.png' align="right"  width="200"/></a>
+
+
+
+The purpose of this package is to provide data sets to draw maps of Turkey at four levels: 
+  - NUTS-Level 1: Broad geographical regions (there are 12)
+  - NUTS-Level 2: Geographical sub-regions (there are 26)
+  - NUTS-Level 3: Provinces (there are 81 as of 2021, these are also the largest 
+  administrative units)
+  - District level: there are 973 districts as of 2021 
+
+
+
+## Installation
+
+The development version can be installed from
+[GitHub](https://github.com/) using
+ 
+```{r eval=FALSE, include=TRUE}
+# devtools is required, install if you don't already have it
+# install.packages("devtools")
+devtools::install_github("htastan/TRmaps")
+```
+
+
+## Basic Usage 
+
+### NUTS-1
+
+
+```{r}
+library(turkeymaps)
+library(tidyverse)
+library(sf)
+```
+
+```{r}
+data("tr_nuts1")
+tr_nuts1
+```
+ 
+
+To draw a simple map, run the following code chunk: 
+```{r ex1}
+ggplot(tr_nuts1) + 
+  geom_sf()
+```
+ 
+ 
+
+
+```{r ex2}
+ggplot(tr_nuts1) + 
+  geom_sf(mapping = aes(fill = NUTS1_name))
+```
+
+  
+
+### NUTS-2
+
+```{r ex3}
+ggplot(tr_nuts2) + 
+  geom_sf()
+```
+  
+
+### NUTS-3
+
+```{r ex4}
+ggplot(tr_nuts3) + 
+  geom_sf()
+```
+ 
+ 
+
+### District level
+
+```{r ex5}
+ggplot(tr_ilce) + 
+  geom_sf()
+```
+
+## Merging with your data set
+
+  
+

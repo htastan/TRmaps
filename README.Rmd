@@ -95,5 +95,34 @@ ggplot(tr_ilce) +
 
 ## Merging with your data set
 
+```{r ex6}
+# load example data set 
+data("trdata2015")
+# select happiness level and province key
+tr_happiness <- trdata2015 %>% 
+  select(province, happiness_level)
+# merge with geo-spatial data 
+tr_happiness2 <- left_join(tr_nuts3, tr_happiness, by = c("name_tr" = "province"))
+ggplot(tr_happiness2) + 
+  geom_sf(aes(fill = happiness_level))
+```
+
+```{r}
+# fixed and interactive maps using {tmap} package
+library(tmap)
+tmap_mode("plot")
+tm_shape(tr_happiness2) +
+  tm_polygons("happiness_level") +
+  tm_layout(legend.outside = TRUE)
+```
+
+```{r}
+# uncomment for interactive map
+# tmap_mode("view")
+# tm_shape(tr_happiness2) +
+#  tm_polygons("happiness_level")
+```
+
+
   
 

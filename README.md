@@ -104,3 +104,36 @@ ggplot(tr_ilce) +
 <img src="man/img/usage-ex5-1.png" width="100%" />
 
 ## Merging with your data set
+
+``` r
+# load example data set 
+data("trdata2015")
+# select happiness level and province key
+tr_happiness <- trdata2015 %>% 
+  select(province, happiness_level)
+# merge with geo-spatial data 
+tr_happiness2 <- left_join(tr_nuts3, tr_happiness, by = c("name_tr" = "province"))
+ggplot(tr_happiness2) + 
+  geom_sf(aes(fill = happiness_level))
+```
+
+<img src="man/img/usage-ex6-1.png" width="100%" />
+
+``` r
+# fixed and interactive maps using {tmap} package
+library(tmap)
+tmap_mode("plot")
+#> tmap mode set to plotting
+tm_shape(tr_happiness2) +
+  tm_polygons("happiness_level") +
+  tm_layout(legend.outside = TRUE)
+```
+
+<img src="man/img/usage-unnamed-chunk-5-1.png" width="100%" />
+
+``` r
+# uncomment for interactive map
+# tmap_mode("view")
+# tm_shape(tr_happiness2) +
+#  tm_polygons("happiness_level")
+```

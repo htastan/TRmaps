@@ -105,6 +105,8 @@ ggplot(tr_ilce) +
 
 ## Merging with your data set
 
+### NUTS-3 example
+
 ``` r
 # load example data set 
 data("trdata2015")
@@ -114,7 +116,8 @@ tr_happiness <- trdata2015 %>%
 # merge with geo-spatial data 
 tr_happiness2 <- left_join(tr_nuts3, tr_happiness, by = c("name_tr" = "province"))
 ggplot(tr_happiness2) + 
-  geom_sf(aes(fill = happiness_level))
+  geom_sf(aes(fill = happiness_level)) +
+  theme_void()
 ```
 
 <img src="man/img/usage-ex6-1.png" width="100%" />
@@ -137,3 +140,45 @@ tm_shape(tr_happiness2) +
 # tm_shape(tr_happiness2) +
 #  tm_polygons("happiness_level")
 ```
+
+### District-level example
+
+``` r
+# load population data 
+data("trpopdata_ilce")
+# map of 2019 district population
+ilce_pop_2019 <- trpopdata_ilce %>% 
+  filter(year==2019) %>% 
+  select(no, pop) 
+
+ilce_pop_2019_comb <- left_join(tr_ilce, ilce_pop_2019, by = c("tuik_no" = "no"))
+# compute population density
+ilce_pop_2019_comb <- ilce_pop_2019_comb %>% 
+  mutate(area = st_area(ilce_pop_2019_comb)) %>% 
+  mutate(density = pop/(Shape_Area*10000), 
+         logdensity = log(density))
+```
+
+``` r
+# istanbul 
+ilce_pop_2019_comb %>% filter(adm1 == "TUR034") %>%
+  ggplot() +
+  geom_sf(aes(fill = density)) + 
+  scale_fill_viridis_c(trans = "log10", 
+                       breaks=c(0,100,1000,10000)) +
+  labs(fill = "Nüfus Yoğunluğu") + 
+  theme_void()
+```
+
+<img src="man/img/usage-unnamed-chunk-8-1.png" width="100%" />
+
+``` r
+# use tmap package 
+# tmap_mode("view")
+tm_shape(ilce_pop_2019_comb) +
+tm_polygons(c("density"), style = "log10_pretty",
+title = "Nüfus yoğunluğu (log)") +
+  tm_layout(legend.outside = TRUE)
+```
+
+<img src="man/img/usage-unnamed-chunk-9-1.png" width="100%" />

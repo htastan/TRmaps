@@ -1,12 +1,17 @@
 
 # TRmaps <a href='https://github.com/htastan/TRmaps'><img src='man/img/hex1.png' align="right"  width="200"/></a>
 
-The purpose of this package is to provide data sets to draw maps of
-Turkey at four levels: - NUTS-Level 1: Broad geographical regions (there
-are 12) - NUTS-Level 2: Geographical sub-regions (there are 26) -
-NUTS-Level 3: Provinces (there are 81 as of 2021, these are also the
-largest administrative units) - District level: there are 973 districts
-as of 2021
+The purpose of this package is to provide geo-spatial data sets that are
+needed to draw regional maps of Turkey at four levels:
+
+-   NUTS-Level 1: Broad geographical regions (there are 12)
+
+-   NUTS-Level 2: Geographical sub-regions (there are 26)
+
+-   NUTS-Level 3: Provinces (there are 81 as of 2021, these are also the
+    largest administrative units)
+
+-   District level: there are 973 districts as of 2021
 
 ## Installation
 

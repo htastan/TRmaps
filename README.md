@@ -19,7 +19,7 @@ The development version can be installed from
 [GitHub](https://github.com/) using
 
 ``` r
-# devtools is required, install if you don't already have it
+# devtools is required
 # install.packages("devtools")
 devtools::install_github("htastan/TRmaps")
 ```

@@ -29,7 +29,7 @@ devtools::install_github("htastan/TRmaps")
 ### NUTS-1
 
 ``` r
-library(turkeymaps)
+library(TRmaps)
 library(tidyverse)
 #> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
 #> v ggplot2 3.3.5     v purrr   0.3.4

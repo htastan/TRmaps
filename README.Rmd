@@ -46,7 +46,7 @@ devtools::install_github("htastan/TRmaps")
 
 
 ```{r}
-library(turkeymaps)
+library(TRmaps)
 library(tidyverse)
 library(sf)
 ```
